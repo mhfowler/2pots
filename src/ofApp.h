@@ -4,11 +4,14 @@
 #include "subApp.h"
 #include "params.h"
 #include "spiralsApp.h"
-#include "redAndBlackApp.h"
-#include "line1App.h"
-#include "wavesApp.h"
-#include "face1App.h"
 #include "testApp.h"
+#include "line1App.h"
+#include "b1App.h"
+#include "c1App.h"
+#include "a1App.h"
+#include "a2App.h"
+#include "test2App.h"
+#include "redLinesApp.h"
 
 class ofApp : public ofBaseApp{
     
@@ -54,12 +57,26 @@ public:
     void decreasePotB();
     
     
-        redAndBlackApp redAndBlackApp;
+        redLinesApp redLinesApp;
         spiralsApp spiralsApp;
     line1App line1App;
-        face1App face1App;
-        wavesApp wavesApp;
-     testApp testApp;
+        a1App a1App;
+       a2App a2App;
+        b1App b1App;
+            c1App c1App;
+     test2App testApp;
+    
+    vector<subApp*> apps = {
+        &redLinesApp,
+        &spiralsApp,
+        &line1App,
+//        &a1App,
+        &a2App,
+        &b1App,
+        &c1App,
+        &testApp
+    };
+    
     subApp * currentApp;
     
 };

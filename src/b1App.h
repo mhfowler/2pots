@@ -1,7 +1,7 @@
 #include "ofMain.h"
 #include "subApp.h"
 
-class wavesApp : public subApp {
+class b1App : public subApp {
 public:
     void setup();
     void update();

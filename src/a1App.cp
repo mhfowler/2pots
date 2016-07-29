@@ -1,18 +1,18 @@
-#include "face1App.h"
+#include "a1App.h"
 
 
 //--------------------------------------------------------------
-void face1App::setup(){
+void a1App::setup(){
 }
 
 
 //--------------------------------------------------------------
-void face1App::update(){
+void a1App::update(){
     
 }
 
 //--------------------------------------------------------------
-void face1App::draw(){
+void a1App::draw(){
     
     ofBackground(255, 255, 255);
     
@@ -32,7 +32,7 @@ void face1App::draw(){
     float randVal = ofMap(params->potB, 0, 1023, 0, 5);
     cout << "randVal: " << randVal << endl;
 //    int numPoints = 100;
-    float col_width = ofGetScreenWidth() / numPoints;
+    float col_width = (ofGetScreenWidth()-200) / numPoints;
     float row_height = (ofGetScreenHeight()-200) / numPoints;
 
     for (int i = 0; i < numPoints; i++) {
@@ -55,6 +55,6 @@ void face1App::draw(){
 }
 
 //--------------------------------------------------------------
-void face1App::cleanup(){
+void a1App::cleanup(){
     
 }

@@ -1,17 +1,17 @@
-#include "wavesApp.h"
+#include "b1App.h"
 
 
 //--------------------------------------------------------------
-void wavesApp::setup(){
+void b1App::setup(){
 }
 
 
 //--------------------------------------------------------------
-void wavesApp::update(){
+void b1App::update(){
     
 }
 
-void wavesApp::cDrawLine(ofPolyline line) {
+void b1App::cDrawLine(ofPolyline line) {
     
     vector<ofPoint> points = line.getVertices();
     
@@ -52,7 +52,7 @@ void wavesApp::cDrawLine(ofPolyline line) {
 }
 
 //--------------------------------------------------------------
-void wavesApp::draw(){
+void b1App::draw(){
     
     ofBackground(255, 255, 255);
     
@@ -99,6 +99,6 @@ void wavesApp::draw(){
 }
 
 //--------------------------------------------------------------
-void wavesApp::cleanup(){
+void b1App::cleanup(){
     
 }

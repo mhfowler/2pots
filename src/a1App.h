@@ -1,7 +1,7 @@
 #include "ofMain.h"
 #include "subApp.h"
 
-class  face1App : public subApp {
+class  a1App : public subApp {
 public:
     void setup();
     void update();

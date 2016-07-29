@@ -2,103 +2,102 @@
 
 
 //--------------------------------------------------------------
-void testApp::setup(){
-    
-    
+void testApp1::setup(){
 }
 
 
 //--------------------------------------------------------------
-void testApp::update(){
-    
-}
-
-void testApp::cDrawLine(ofPolyline line) {
-    
-    vector<ofPoint> points = line.getVertices();
-    
-    float delta = ofMap(params->potB, 0, 1023, 0, 50);
-    
-    ofPoint prevPoint;
-    for (int i = 1; i < points.size(); i++) {
-        ofPoint prevPoint = points[i-1];
-        ofPoint point = points[i];
-        ofDrawLine(prevPoint, point);
-        for (int j=1; j<delta; j++) {
-            ofDrawLine(
-                       ofPoint(prevPoint.x + i*j, prevPoint.y + i*j),
-                       ofPoint(point.x + i*j, point.y + i*j)
-                       );
-        }
-    };
+void testApp1::update(){
     
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
+void testApp1::draw(){
     
- ofSeedRandom(10);
+    // test firmata
+    
+    
+    float varX = 16;
+    float varY = 149;
+    
+    float now = ofGetElapsedTimef();
+    ofSeedRandom(10);
     
     ofBackground(255, 255, 255);
     
-    
-//    int num_deltaA = ofMap(params->potA, 0, 1023, 3, 50);
-//    int num_deltaB = ofMap(params->potB, 0, 1023, 3, 50);
-//    int num_items = ofMap(params->potA + params->potB, 0, 2050, 3, 100);
-    
-//    float maxMultiple = ofGetMouseY();
-//    float maxMultiple = 356; // full screen
-    float maxMultiple = 183;
-//    cout << "maxMultiple: " << maxMultiple << endl;
-    
-        int num_deltaA = ofMap(params->potA, 0, 1023, 3, 50);
+    //    float x1 = ofMap(potA, 0, 255, 100, 500);
+    //    float y1 = ofMap(potA, 0, 255, 100, 300);
+    //    float x2 = ofMap(potB, 0, 255, 100, 500);
+    //    float y2 = ofMap(potB, 0, 255, 100, 300);
     
     
-    int num_deltaB = 1;
-    if (params->potB > 10) {
-        num_deltaB = ofMap(params->potB, 10, 1023, 1, maxMultiple);
-    }    
-    
-    int num_items = num_deltaA * num_deltaB;
-    
-    
-//    cout << "potaA: " << params->potA << endl;
-//        cout << "potaB: " << params->potB << endl;
-//        cout << "num_deltaA: " << num_deltaA << endl;
-//    cout << "num_deltaB: " << num_deltaB << endl;
-    cout << params->potA << " | " << params->potB << " | " << endl;
-    
-    
-    
-    if (abs(num_items - lastNumItems) > 2) {
-        lastNumItems = num_items;
     float x1 = 100;
-    float y1 = 300;
-    float x2 = 300;
-    float y2 = 100;
+    float y1 = 100;
+    int rect_width = 400;
+    int rect_height = 200;
+    float x2 = x1 + rect_height;
+    float y2 = y1 + rect_height;
+
+    
+    float aDelt = ofMap(params->potA, 0, 1024, 0, 400);
+    float x1Delt = x1 + aDelt;
+    
+    float bDelt = ofMap(params->potB, 0, 1024, 0, 400);
+    float x2Delt = x2 + bDelt;
     
     ofVec2f center = ofVec2f(0, 0);
-    vector<ofPoint> linePoints;
+    vector<ofPoint> linePoints = {
         
-    float w = ofGetScreenWidth();
-    float h = ofGetScreenHeight();
-    
-    for (int i=0; i<num_items; i++) {
-        ofPoint p = ofPoint(ofRandom(0, w), ofRandom(0, h));
-        linePoints.push_back(p);
-    }
-    
-    ofSetColor(255, 0, 0);
-    line = ofPolyline(linePoints);
-    }
-//    line.draw();
+        ofPoint(
+                x1Delt,
+                y1
+                ),
+        ofPoint(
+                x2Delt,
+                y2
+                ),
+    };
+    ofSetColor(0);
+    ofPolyline line = ofPolyline(linePoints);
     line.draw();
     
-//    cDrawLine(line);
+    
+    
+    ofSetColor(255, 0, 0);
+    ofDrawCircle(x1Delt, y1, 4);
+    
+    ofSetColor(0, 0, 255);
+    ofDrawCircle(x2Delt, y2, 4);
+    
+    ofSetColor(0);
+    vector<ofPoint> rectPoints = {
+        ofPoint(
+                x1,
+                y1
+                ),
+        ofPoint(
+                x1 + rect_width,
+                100
+                ),
+        ofPoint(
+                x1 + rect_width,
+                y1 + rect_height
+                ),
+        ofPoint(
+                x1,
+                y1 + rect_height
+                ),
+        ofPoint(
+                x1,
+                y1
+                )
+    };
+    ofPolyline rectLine = ofPolyline(rectPoints);
+    rectLine.draw();
     
 }
 
 //--------------------------------------------------------------
-void testApp::cleanup(){
+void testApp1::cleanup(){
     
 }

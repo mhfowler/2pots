@@ -18,18 +18,18 @@ void ofApp::setup(){
     bSetupArduino	= false;	// flag so we setup arduino when its ready, you don't need to touch this :)
     
     
-    line1App.init(&params);
-        redAndBlackApp.init(&params);
-        spiralsApp.init(&params);
-      wavesApp.init(&params);
-          testApp.init(&params);
-         face1App.init(&params);
     
+    // init all the apps
+        for (int i = 0; i < apps.size(); i++) {
+            subApp * appPointer = apps[i];
+            appPointer->init(&params);
+        }
     
-//        currentApp = &testApp;
-//          currentApp = &wavesApp;
-         currentApp = &face1App;
+//         currentApp = &testApp;
+//             currentApp = &c1App;
+             currentApp = &a2App;
 //    currentApp = &line1App;
+    
     currentApp->setup();
 }
 
@@ -139,32 +139,9 @@ void ofApp::analogPinChanged(const int & pinNum) {
 void ofApp::buttonAPressed(){
     // TODO:
     buttonAState += 1;
-    buttonAState = buttonAState % 6;
-    if (buttonAState == 0) {
-                currentApp = &line1App;
-        currentApp->setup();
-    }
-    else if (buttonAState == 1) {
-                currentApp = &redAndBlackApp;
-        currentApp->setup();
-    }
-    else if (buttonAState == 2) {
-                currentApp = &spiralsApp;
-        currentApp->setup();
-    }
-    else if (buttonAState == 3) {
-        currentApp = &wavesApp;
-        currentApp->setup();
-    }
-    else if (buttonAState == 4) {
-        currentApp = &testApp;
-        currentApp->setup();
-    }
-    else if (buttonAState == 5) {
-        currentApp = &face1App;
-        currentApp->setup();
-    }
-    
+    buttonAState = buttonAState % apps.size();
+    currentApp = apps[buttonAState];
+    currentApp->setup();
 }
 
 
