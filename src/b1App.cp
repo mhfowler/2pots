@@ -55,6 +55,9 @@ void b1App::cDrawLine(ofPolyline line) {
 void b1App::draw(){
     
     ofBackground(255, 255, 255);
+    ofSetColor(0);
+//    ofBackground(20, 100, 40);
+//    ofSetColor(300, 300, 100);
     
     vector<ofPoint> sPoints;
     
@@ -75,7 +78,6 @@ void b1App::draw(){
     
 
     
-    ofSetColor(255, 0, 0);
     for (int i = 0; i < num_w_cols; i++) {
     for (int j = 0; j < num_h_rows; j++) {
         float x = colWidth * i;
@@ -84,12 +86,11 @@ void b1App::draw(){
     }
     }
     
-    ofSetColor(0);
     ofPolyline sLine = ofPolyline(sPoints);
     cDrawLine(sLine);
     
 
-    float endDelta = ofMap(params->potB, 0, 1023, 0, ofGetScreenHeight());
+    float endDelta = ofMap(params->potA, 0, 1023, 0, ofGetScreenHeight());
     
     ofPolyline line1 = ofPolyline({
         ofPoint(0, 100), ofPoint(ofGetScreenWidth(), 130)

@@ -31,7 +31,7 @@ void testApp1::draw(){
     //    float y2 = ofMap(potB, 0, 255, 100, 300);
     
     
-    float x1 = 100;
+    float x1 = 300;
     float y1 = 100;
     int rect_width = 400;
     int rect_height = 200;

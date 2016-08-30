@@ -15,6 +15,8 @@ void a1App::update(){
 void a1App::draw(){
     
     ofBackground(255, 255, 255);
+//        ofBackground(20, 100, 40);
+//        ofSetColor(300, 300, 100);
     
     float x1 = 100;
     float y1 = 300;
@@ -27,12 +29,12 @@ void a1App::draw(){
     
 //    int numPoints = max(ofGetMouseY(), 1);
     float numPoints = ofMap(params->potA, 0, 1023, 15, 1000);
-    cout << "numPoints: " << numPoints << endl;
+//    cout << "numPoints: " << numPoints << endl;
     
     float randVal = ofMap(params->potB, 0, 1023, 0, 5);
-    cout << "randVal: " << randVal << endl;
+//    cout << "randVal: " << randVal << endl;
 //    int numPoints = 100;
-    float col_width = (ofGetScreenWidth()-200) / numPoints;
+    float col_width = (ofGetScreenWidth()) / numPoints;
     float row_height = (ofGetScreenHeight()-200) / numPoints;
 
     for (int i = 0; i < numPoints; i++) {

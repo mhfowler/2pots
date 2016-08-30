@@ -6,6 +6,14 @@
 #include "spiralsApp.h"
 #include "testApp.h"
 #include "line1App.h"
+#include "d1App.h"
+#include "h1App.h"
+#include "e1App.h"
+#include "g1App.h"
+#include "g2App.h"
+#include "e2App.h"
+#include "e3App.h"
+#include "e4App.h"
 #include "b1App.h"
 #include "c1App.h"
 #include "a1App.h"
@@ -50,6 +58,7 @@ public:
     
     ofColor dotColor;
     int buttonAState = 0;
+    float lastButtonPress;
     
     void increasePotA();
     void increasePotB();
@@ -59,22 +68,45 @@ public:
     
         redLinesApp redLinesApp;
         spiralsApp spiralsApp;
-    line1App line1App;
+    g1App g1App;
+        g2App g2App;
         a1App a1App;
        a2App a2App;
         b1App b1App;
             c1App c1App;
+            d1App d1App;
+         e1App e1App;
      test2App testApp;
+        e2App e2App;
+            e3App e3App;
+            e4App e4App;
+            h1App h1App;
     
     vector<subApp*> apps = {
+        
         &redLinesApp,
-        &spiralsApp,
-        &line1App,
+        
+//        &line1App,
 //        &a1App,
-        &a2App,
-        &b1App,
-        &c1App,
-        &testApp
+        
+//        &testApp,
+        
+//               &a2App, // noise rectangle
+        &a1App, // noise square
+        &b1App, // glitch triangles
+        &spiralsApp,
+        
+             &h1App, // just light
+        
+//        &e1App,
+//        &c1App,
+//        &d1App,
+//                   &e2App,
+//                   &e3App,
+//             &e4App
+        
+        &g1App,       // two hand drawn squares
+//             &g2App   // light shade
     };
     
     subApp * currentApp;

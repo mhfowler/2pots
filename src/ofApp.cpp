@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    //     serial.setup("/dev/tty.usbmodem1421", 9600);
+    serial.setup("/dev/tty.usbmodem1421", 9600);
     
     // replace the string below with the serial port for your Arduino board
     // you can get this from the Arduino application or via command line
@@ -26,8 +26,13 @@ void ofApp::setup(){
         }
     
 //         currentApp = &testApp;
+             currentApp = apps[0];
+//         currentApp = &b1App;
+//              currentApp = &spiralsApp;
+//        currentApp = &h1App;
+    
 //             currentApp = &c1App;
-             currentApp = &a2App;
+//             currentApp = &a2App;
 //    currentApp = &line1App;
     
     currentApp->setup();
@@ -58,12 +63,14 @@ void ofApp::setupArduino(const int & version) {
     // set pin D5 & D7 as digital output
     
     //ARD_ANALOG ?
+    lastButtonPress = ofGetElapsedTimef();
     ard.sendAnalogPinReporting(0, ARD_ANALOG);
     ard.sendAnalogPinReporting(2, ARD_ANALOG);
+//    ard.sendAnalogPinReporting(3, ARD_ANALOG);
     
-    ard.sendDigitalPinMode(7, ARD_INPUT);
-    ard.sendDigitalPinMode(3, ARD_PWM);
-    ard.sendDigitalPinMode(5, ARD_PWM);
+//    ard.sendDigitalPinMode(7, ARD_INPUT);
+       ard.sendDigitalPinMode(5, ARD_INPUT);
+//    ard.sendDigital(7, ARD_HIGH); // connect internal pull-up resistor
     //    ard.sendDigitalPinMode(7, ARD_OUTPUT);
     
     // Listen for changes on the digital and analog pins
@@ -82,8 +89,8 @@ void ofApp::updateArduino(){
     if (bSetupArduino) {
         // fade the led connected to pin D11
         //        ard.sendPwm(3, (int)(120 + 128 * sin(ofGetElapsedTimef())));   // pwm...
-        ard.sendPwm(3, params.potA);
-        ard.sendPwm(5, params.potB);
+//        ard.sendPwm(3, params.potA);
+//        ard.sendPwm(5, params.potB);
         //            ard.sendDigital(3, ARD_HIGH);
     }
     
@@ -98,11 +105,29 @@ void ofApp::updateArduino(){
 
 //--------------------------------------------------------------
 void ofApp::digitalPinChanged(const int & pinNum) {
-    int bState = ard.getDigital(pinNum);
-    if (bState == 1) {
+//    int bState = ard.getDigital(pinNum);
+    
+    int buttonState = ard.getDigital(pinNum);
+    float now = ofGetElapsedTimef();
+    
+//    if (pinNum == 7 && buttonState == ARD_LOW && now - lastButtonPress > 0.3) {
+////    if (pinNum == 7 && buttonState == ARD_LOW) {
+//        lastButtonPress = now;
+//        buttonAPressed();
+//    }
+    
+//    if (pinNum == 7 && buttonState == 1 && now - lastButtonPress > 0.1) {
+//        lastButtonPress = now;
+//        buttonAPressed();
+//
+//    if (pinNum == 5 && buttonState == 1 && now - lastButtonPress > 0.4) {
+    if (pinNum == 5 && buttonState == 1) {
+        lastButtonPress = now;
         buttonAPressed();
     }
-    cout << "bstate: " << bState << endl;
+    
+       cout << "pinNum: "  << pinNum << endl;
+    cout << "bstate: " << buttonState << endl;
     //    potA = ard.getAnalog(0);
     //    potB = ard.getAnalog(2);
 }
@@ -115,15 +140,31 @@ void ofApp::analogPinChanged(const int & pinNum) {
     int val = ard.getAnalog(pinNum);
     if (pinNum == 0) {
         if (abs(val - params.potA) > 10) {
-            params.potA = val;
-            cout << "potA: " << params.potA << endl;
+            params.potA = ofMap(val, 0, 1023, 1023, 0);
+            currentApp->update();
+//            cout << "potA: " << params.potA << endl;
         };
     }
     else if (pinNum == 2) {
         if (abs(val - params.potB) > 10) {
-        params.potB = val;
-        cout << "potB: " << params.potA << endl;
-        };
+        params.potB = ofMap(val, 0, 1023, 1023, 0);
+        currentApp->update();
+//        cout << "potB: " << params.potA << endl;
+        }
+//    else if (pinNum == 3) {
+//        int newPinState = ofMap(val, 0, 1023, 0, apps.size()+1);
+//        if (newPinState > apps.size()) {
+//            newPinState = apps.                                                                            size();
+//        }
+//        if (newPinState != buttonAState) {
+//            cout << "pinState: " << newPinState << endl;
+//            buttonAState = newPinState;
+//            currentApp = apps[buttonAState];
+//            currentApp->setup();
+//            currentApp->update();
+//        }
+//                //        cout << "potB: " << params.potA << endl;
+//    };
     };
     //    else state = ARD_LOW;
     //    if(pinNum == 4) {
@@ -160,6 +201,9 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     
     if (key == 106) {
+        buttonAPressed();
+    }
+    else if (key == 32) {
         buttonAPressed();
     }
     else if (key == 101) {

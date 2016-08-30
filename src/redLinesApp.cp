@@ -40,6 +40,7 @@ void redLinesApp::draw(){
  ofSeedRandom(10);
     
     ofBackground(255, 255, 255);
+    ofSetColor(255, 0, 0);
     
     
 //    int num_deltaA = ofMap(params->potA, 0, 1023, 3, 50);
@@ -66,7 +67,7 @@ void redLinesApp::draw(){
 //        cout << "potaB: " << params->potB << endl;
 //        cout << "num_deltaA: " << num_deltaA << endl;
 //    cout << "num_deltaB: " << num_deltaB << endl;
-    cout << params->potA << " | " << params->potB << " | " << endl;
+//    cout << params->potA << " | " << params->potB << " | " << endl;
     
     
     
